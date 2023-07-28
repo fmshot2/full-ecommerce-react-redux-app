@@ -54,7 +54,10 @@ import { loadUser } from './actions/userActions'
 import { useSelector } from 'react-redux'
 import store from './store'
 import axios from 'axios'
-
+import Profile from "./components/user/Profile";
+import Protected from "./components/route/Protected";
+import UpdateProfile from "./components/user/UpdateProfile";
+import UpdatePassword from "./components/user/UpdatePassword";
 
 // <!-- bigshop -->
 //  <!-- jQuery (Necessary for All JavaScript Plugins) -->
@@ -98,7 +101,7 @@ function App() {
 
   }, [])
 
-  const { user, isAuthenticated, loading } = useSelector(state => state.auth)
+  const { user, isAuthenticated } = useSelector(state => state.auth)
   return (
     <BrowserRouter>
       <div className="">
@@ -113,6 +116,34 @@ function App() {
           < Route path="/product/:id" element={<ProductDetails />} />
           < Route path="/login" element={<Login />} />
           < Route path="/register" element={<Register />} />
+
+          <Route element={<Protected isAllowed={
+            !!isAuthenticated && user.role !== 'admin'
+          } />}>
+            <Route path="/me" element={<Profile />} />
+            <Route path="/me/update" element={<UpdateProfile />} />
+            <Route path="/password/update" element={<UpdatePassword />} />
+          </Route>
+
+          {/* //using only isAuthenticated as param */}
+          {/* <Route element={<Protected isAuthenticated={isAuthenticated} />}>
+            <Route path="/me" element={<Profile />} />
+          </Route> */}
+
+
+          {/* <Route
+          path="analytics"
+          element={
+            <ProtectedRoute
+              redirectPath="/home"
+              isAllowed={
+                !!user && user.permissions.includes('analyze')
+              }
+            >
+              <Analytics />
+            </ProtectedRoute>
+          }
+        /> */}
         </Routes>
         <Footer />
       </div>

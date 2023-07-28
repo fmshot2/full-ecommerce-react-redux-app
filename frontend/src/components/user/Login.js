@@ -24,16 +24,16 @@ const Login = ({ history, location }) => {
     useEffect(() => {
 
         if (isAuthenticated) {
-            // history.push(redirect)
             navigate('/')
         }
 
         if (error) {
+            console.log('login error', error)
             alert.error(error);
             dispatch(clearErrors());
         }
 
-    }, [dispatch, alert, isAuthenticated, error, history])
+    }, [dispatch, alert, isAuthenticated, error, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault();

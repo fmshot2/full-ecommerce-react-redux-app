@@ -32,9 +32,10 @@ const Register = ({ history, location }) => {
 
     useEffect(() => {
 
+
         if (isAuthenticated) {
             // history.push(redirect)
-            // navigate('/')
+            navigate('/')
         }
 
         if (error) {
@@ -42,7 +43,7 @@ const Register = ({ history, location }) => {
             dispatch(clearErrors());
         }
 
-    }, [dispatch, alert, isAuthenticated, error, history])
+    }, [dispatch, alert, isAuthenticated, error, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault();
