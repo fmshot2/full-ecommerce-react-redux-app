@@ -46,7 +46,6 @@ const Login = ({ history, location }) => {
                 <Fragment>
                     <MetaData title={'Login'} />
 
-
                     <div className="bigshop_reg_log_area section_padding_100_50">
                         <div className="container">
                             <div className="row">
@@ -78,7 +77,7 @@ const Login = ({ history, location }) => {
                                         </form>
                                         {/* <!-- Forget Password --> */}
                                         <div className="forget_pass mt-15">
-                                            <a href="#">Forget Password?</a>
+                                            <Link to="/password/forgot">Forgot Password?</Link>
                                         </div>
                                     </div>
                                 </div>

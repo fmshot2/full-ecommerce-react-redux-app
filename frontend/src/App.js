@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 // import "./assets/css/color4.css";
 //   import "./assets/css/font-awesome.css";
@@ -58,7 +58,9 @@ import Profile from "./components/user/Profile";
 import Protected from "./components/route/Protected";
 import UpdateProfile from "./components/user/UpdateProfile";
 import UpdatePassword from "./components/user/UpdatePassword";
-
+import ForgotPassword from "./components/user/ForgotPassword";
+import NewPassword from "./components/user/NewPassword";
+import Cart from "./components/cart/Cart";
 // <!-- bigshop -->
 //  <!-- jQuery (Necessary for All JavaScript Plugins) -->
 // import "./assets/js/jquery.min.js";
@@ -116,6 +118,9 @@ function App() {
           < Route path="/product/:id" element={<ProductDetails />} />
           < Route path="/login" element={<Login />} />
           < Route path="/register" element={<Register />} />
+          < Route path="/password/forgot" element={<ForgotPassword />} />
+          <Route path="/password/reset/:token" element={<NewPassword />} />
+          <Route path="/cart" element={<Cart />} />
 
           <Route element={<Protected isAllowed={
             !!isAuthenticated && user.role !== 'admin'

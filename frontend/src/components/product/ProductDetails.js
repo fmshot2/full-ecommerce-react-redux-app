@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { useParams, Link } from "react-router-dom";
@@ -9,12 +9,18 @@ import Carousel from 'react-bootstrap/Carousel';
 
 import { getProductDetails, ClearErrors } from "../../actions/productActions";
 
+import { addItemToCart } from '../../actions/cartActions'
+
 const ProductDetails = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const { loading, error, product } = useSelector(
     (state) => state.productDetails
   );
+  const [quantity, setQuantity] = useState(1);  
+  const min = 1;
+  const max = product.stock;
+
   let params = useParams();
   useEffect(() => {
     dispatch(getProductDetails(params.id));
@@ -25,6 +31,20 @@ const ProductDetails = () => {
       dispatch(ClearErrors());
     }
   }, [dispatch, alert, error, params.id]);
+
+  const handleCount = (e) => {
+  const value = Math.max(min, Math.min(max, Number(e.target.value)));
+  // or use
+  // const value = Number(e.target.value);
+
+    setQuantity(value);
+  }
+
+  const addToCart = () => {
+    console.log('dddd', params.id);
+    dispatch(addItemToCart(params.id, quantity))
+    alert.success('Item dded to cart')
+  }
   return (
     <Fragment>
       {loading ? (
@@ -155,11 +175,15 @@ const ProductDetails = () => {
                     </div>
 
                     {/* <!-- Add to Cart Form --> */}
-                    <form className="cart clearfix my-5 d-flex flex-wrap align-items-center" method="post">
+                    <form className="cart clearfix my-5 d-flex flex-wrap align-items-center">
                       <div className="quantity">
-                        <input type="number" className="qty-text form-control" id="qty2" step="1" min="1" max="12" name="quantity" />
+                        <input type="number" className="qty-text form-control" 
+                        onChange={handleCount}
+                         id="qty2" step="1" value={quantity} min="1" max={product.stock} name="quantity" />
                       </div>
-                      <button type="submit" name="addtocart" className="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3">Add to cart</button>
+                      <button type="submit" name="addtocart" 
+                      className="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3"
+                      disabled={product.stock === 0} onClick={addToCart}>Add to cart</button>
                     </form>
 
                     {/* <!-- Others Info --> */}
