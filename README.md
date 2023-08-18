@@ -1,4 +1,4 @@
-About Full Ecommerce React-Redux App
+#About Full Ecommerce React-Redux App
 Full Ecommerce React-Redux App is a fully functional ecommerce app built with React/Redux and Node Js. It includes a full admin management system for the Users, Products, Categories, etc. The User part involves a full search, filter, cart, wishlist and payment systems:
 
 Running the Project
