@@ -3,3 +3,20 @@
     font-weight: 300;
     line-height: 1.2;
 }
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #eef1f5;
+    /* opacity: 1; */
+    border: 1px solid #d6e6fb;
+    margin: 5px;
+    /* e4edf8 */
+}
+
+.femi-cart-change-btn {
+    padding: 15px;
+    line-height: 2.5px;
+}
+
+.count.femi-cart-change-btn {
+    padding-bottom: 19px;
+}

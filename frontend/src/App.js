@@ -46,6 +46,8 @@ import Search from './components/Search';
 import Searcher from "./components/layout/Searcher";
 import Footer from './components/layout/Footer';
 import ProductDetails from './components/product/ProductDetails';
+import Cart from "./components/cart/Cart";
+
 import Product from './components/product/Product';
 import ProductByCategory from './components/ProductByCategory';
 import Login from "./components/user/Login";
@@ -60,7 +62,8 @@ import UpdateProfile from "./components/user/UpdateProfile";
 import UpdatePassword from "./components/user/UpdatePassword";
 import ForgotPassword from "./components/user/ForgotPassword";
 import NewPassword from "./components/user/NewPassword";
-import Cart from "./components/cart/Cart";
+import Shipping from "./components/cart/Shipping";
+import ConfirmOrder from "./components/cart/ConfirmOrder";
 // <!-- bigshop -->
 //  <!-- jQuery (Necessary for All JavaScript Plugins) -->
 // import "./assets/js/jquery.min.js";
@@ -88,6 +91,7 @@ import Cart from "./components/cart/Cart";
 import "./assets/css/style.css";
 import "./assets/css/femi.css";
 
+
 function App() {
 
   useEffect(() => {
@@ -114,13 +118,14 @@ function App() {
           <Route path="/search/:keyword" element={<Search />} />
           <Route path="/product/" element={<Product />} />
           <Route path="/productbycategory/" element={<ProductByCategory />} />
+          <Route path="/cart" element={<Cart />} />
+
           {/* <Route path="/search/:keyword" element={<Searcher/>} /> */}
           < Route path="/product/:id" element={<ProductDetails />} />
           < Route path="/login" element={<Login />} />
           < Route path="/register" element={<Register />} />
           < Route path="/password/forgot" element={<ForgotPassword />} />
           <Route path="/password/reset/:token" element={<NewPassword />} />
-          <Route path="/cart" element={<Cart />} />
 
           <Route element={<Protected isAllowed={
             !!isAuthenticated && user.role !== 'admin'
@@ -128,6 +133,8 @@ function App() {
             <Route path="/me" element={<Profile />} />
             <Route path="/me/update" element={<UpdateProfile />} />
             <Route path="/password/update" element={<UpdatePassword />} />
+            <Route path="/shipping" element={<Shipping />} />
+            <Route path="/order/confirm" element={<ConfirmOrder />} />
           </Route>
 
           {/* //using only isAuthenticated as param */}

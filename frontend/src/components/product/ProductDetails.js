@@ -175,7 +175,7 @@ const ProductDetails = () => {
                     </div>
 
                     {/* <!-- Add to Cart Form --> */}
-                    <form className="cart clearfix my-5 d-flex flex-wrap align-items-center">
+                    <div className="cart clearfix my-5 d-flex flex-wrap align-items-center">
                       <div className="quantity">
                         <input type="number" className="qty-text form-control" 
                         onChange={handleCount}
@@ -184,7 +184,7 @@ const ProductDetails = () => {
                       <button type="submit" name="addtocart" 
                       className="btn btn-primary mt-1 mt-md-0 ml-1 ml-md-3"
                       disabled={product.stock === 0} onClick={addToCart}>Add to cart</button>
-                    </form>
+                    </div>
 
                     {/* <!-- Others Info --> */}
                     <div className="others_info_area mb-3 d-flex flex-wrap">

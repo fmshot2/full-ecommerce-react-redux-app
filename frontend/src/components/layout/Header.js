@@ -25,6 +25,8 @@ const Header = () => {
     const dispatch = useDispatch();
 
     const { user, loading } = useSelector(state => state.auth);
+    const { cartItems } = useSelector(state => state.cart)
+
 
     const logoutHandler = () => {
         dispatch(logout());
@@ -95,7 +97,7 @@ const Header = () => {
 
                                 {/* <!-- Nav Brand --> */}
                                 {/* <a href="index.html" className="nav-brand"><img src="../assets/img/core-img/logo.png" alt="logo" /></a> */}
-                                <a className="nav-brand"><img src="../assets/img/core-img/logo.png" alt="logo" /></a>
+                                <a className="nav-brand"><img src="/bigshop/assets/img/core-img/logo.png" alt="logos" /></a>
 
 
                                 {/* <!-- Toggler --> */}
@@ -254,7 +256,10 @@ const Header = () => {
                                     {/* <!-- Search --> */}
                                     {/* <div className="search-area"> */}
                                     <div className="search-area" onClick={() => setSearchForm(!searchForm)} >
-                                        <div className="search-btn"><i className="icofont-search"></i></div>
+                                        <div className="search-btn">
+                                            {/* <i className="icofont-search"></i> */}
+                                            <i className="fa fa-search"></i>
+                                            </div>
                                         {/* <!-- Form --> */}
 
                                         < div className={`search-form ${searchForm ? "active" : ""}`}>
@@ -270,38 +275,29 @@ const Header = () => {
 
                                     {/* <!-- Cart --> */}
                                     <div className="cart-area">
-                                        <div className="cart--btn"><i className="icofont-cart"></i> <span className="cart_quantity">2</span>
+                                        <div className="cart--btn" ><i className="icofont-cart"></i> <span className="cart_quantity">{cartItems.length}</span>
                                         </div>
 
                                         {/* <!-- Cart Dropdown Content --> */}
                                         <div className="cart-dropdown-content">
                                             <ul className="cart-list">
-                                                <li>
-                                                    <div className="cart-item-desc">
-                                                        <a className="image">
-                                                            <img src="../assets/img/product-img/top-1.png" className="cart-thumb" alt="" />
-                                                        </a>
-                                                        <div>
-                                                            <a>Kid's Fashion</a>
-                                                            <p>1 x - <span className="price">$32.99</span></p>
-                                                        </div>
-                                                    </div>
-                                                    <span className="dropdown-product-remove"><i className="icofont-bin"></i></span>
-                                                </li>
-                                                <li>
-                                                    <div className="cart-item-desc">
-                                                        <a className="image">
-                                                            <img src="../assets/img/product-img/best-4.png" className="cart-thumb" alt="" />
-                                                        </a>
-                                                        <div>
-                                                            <a>Headphone</a>
-                                                            {/* <a href="#">Headphone</a> */}
-                                                            <p>2x - <span className="price">$49.99</span></p>
-                                                        </div>
-                                                    </div>
-                                                    <span className="dropdown-product-remove"><i className="icofont-bin"></i></span>
-                                                </li>
-                                            </ul>
+                                                {cartItems.map(item => (
+                                                    <Fragment>
+                                                        <li>
+                                                            <div className="cart-item-desc">
+                                                                <a className="image">
+                                                                    <img src={item.image} className="cart-thumb" alt="" />
+                                                                </a>
+                                                                <div>
+                                                                    <a>{item.name}</a>
+                                                                    <p>1 x - <span className="price">${item.price}</span></p>
+                                                                </div>
+                                                            </div>
+                                                            <span className="dropdown-product-remove"><i className="icofont-bin"></i></span>
+                                                        </li>
+                                                    </Fragment>
+                                                    ))}
+                                                    </ul>
                                             <div className="cart-pricing my-4">
                                                 <ul>
                                                     <li>
@@ -320,6 +316,12 @@ const Header = () => {
                                             </div>
                                             <div className="cart-box">
                                                 <a className="btn btn-primary d-block">Checkout</a>
+                                                {/* <a href="checkout-1.html" className="btn btn-primary d-block">Checkout</a> */}
+                                            </div>
+                                            <p className='justify-self-center'>or</p>
+                                            
+                                            <div className="cart-box">
+                                                <Link to={'/cart'} className="btn btn-primary d-block">Go To Cart</Link>
                                                 {/* <a href="checkout-1.html" className="btn btn-primary d-block">Checkout</a> */}
                                             </div>
                                         </div>

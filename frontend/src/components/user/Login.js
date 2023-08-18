@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 import Loader from '../layout/Loader'
 import MetaData from '../layout/MetaData'
@@ -8,7 +8,7 @@ import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { login, clearErrors } from '../../actions/userActions'
 
-const Login = ({ history, location }) => {
+const Login = () => {
     let navigate = useNavigate()
 
     const [email, setEmail] = useState('');
@@ -16,24 +16,36 @@ const Login = ({ history, location }) => {
 
     const alert = useAlert();
     const dispatch = useDispatch();
+    const location = useLocation();
+
 
     const { isAuthenticated, error, loading } = useSelector(state => state.auth);
+    const state = location.state;
+    
 
     // const redirect = location.search ? location.search.split('=')[1] : '/'
 
     useEffect(() => {
 
         if (isAuthenticated) {
-            navigate('/')
-        }
+
+            if (state && (state.from)) {
+
+                // Redirects back to the previous unauthenticated routes
+               return navigate(state?.from);
+            }
+               return navigate('/');
+            }
+            // navigate('/')
+    
 
         if (error) {
             console.log('login error', error)
             alert.error(error);
             dispatch(clearErrors());
         }
-
-    }, [dispatch, alert, isAuthenticated, error, navigate])
+ 
+    }, [dispatch, alert, isAuthenticated, error, navigate, state])
 
     const submitHandler = (e) => {
         e.preventDefault();

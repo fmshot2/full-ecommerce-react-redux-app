@@ -168,7 +168,7 @@
 
 .plus,
 .minus {
-  padding: 0.1rem 0.5rem;
+  padding: 0.01rem 0.05rem;
 }
 
 .stockCounter input::-webkit-outer-spin-button,
