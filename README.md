@@ -11,4 +11,4 @@ If you discover a security vulnerability within this app or any of my open sourc
 The Project is an open-sourced software licensed under the MIT license.
 
 ## Follow
-Follow me on MinkedIn (https://www.linkedin.com/in/femi-shotola), Medium (https://medium.com/@femishotolaa) or on twitter: https://twitter.com/_fmshot for more great open source tools.
+Follow me on LinkedIn (https://www.linkedin.com/in/femi-shotola), Medium (https://medium.com/@femishotolaa) or on twitter: https://twitter.com/_fmshot for more great open source tools.
