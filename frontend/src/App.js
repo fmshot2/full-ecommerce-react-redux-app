@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // import "./assets/css/color4.css";
 //   import "./assets/css/font-awesome.css";
@@ -64,46 +64,32 @@ import ForgotPassword from "./components/user/ForgotPassword";
 import NewPassword from "./components/user/NewPassword";
 import Shipping from "./components/cart/Shipping";
 import ConfirmOrder from "./components/cart/ConfirmOrder";
-// <!-- bigshop -->
-//  <!-- jQuery (Necessary for All JavaScript Plugins) -->
-// import "./assets/js/jquery.min.js";
-// import "./assets/bigshop/assets/js/popper.min.js";
-// import "./assets/bigshop/assets/js/bootstrap.min.js";
-// import "./assets/bigshop/assets/js/jquery.easing.min.js";
-// import "./assets/js/classy-nav.min.js";
-// import "./assets/js/owl.carousel.min.js";
-// import "./assets/bigshop/assets/js/scrollup.js";
-// import "./assets/bigshop/assets/js/waypoints.min.js";
-// import "./assets/bigshop/assets/js/jquery.countdown.min.js";
-// import "./assets/bigshop/assets/js/jquery.counterup.min.js";
-// import "./assets/bigshop/assets/js/jquery-ui.min.js";
-// import "./assets/js/jarallax.min.js";
-// import "./assets/js/jarallax-video.min.js";
-// import "./assets/bigshop/assets/js/jquery.magnific-popup.min.js";
-// import "./assets/bigshop/assets/js/jquery.nice-select.min.js";
-// import "./assets/bigshop/assets/js/wow.min.js";
-// import "./assets/js/active.js";
-
-//  <!-- end bigshop -->
+import Payment from "./components/cart/Payment";
 
 
 // <!-- Style CSS -->
 import "./assets/css/style.css";
 import "./assets/css/femi.css";
 
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 function App() {
+
+  const [stripeApiKey, setStripeApiKey] = useState('');
 
   useEffect(() => {
     store.dispatch(loadUser())
 
-    // async function getStripApiKey() {
-    //   const { data } = await axios.get('/api/v1/stripeapi');
+    async function getStripApiKey() {
+      const { data } = await axios.get('/api/v1/stripeapi');
 
-    //   setStripeApiKey(data.stripeApiKey)
-    // }
+      console.log('dataStripe', data);
 
-    // getStripApiKey();
+      setStripeApiKey(data.stripeApiKey)
+    }
+
+    getStripApiKey();
 
   }, [])
 
@@ -134,7 +120,19 @@ function App() {
             <Route path="/me/update" element={<UpdateProfile />} />
             <Route path="/password/update" element={<UpdatePassword />} />
             <Route path="/shipping" element={<Shipping />} />
-            <Route path="/order/confirm" element={<ConfirmOrder />} />
+            <Route path="/order/confirm" element={< ConfirmOrder />} />
+            {/* <Route path="/payment" element={< ConfirmOrder />} /> */}
+            {/* {stripeApiKey && <Route path="/order/payment" element={< Payment/>} />} */}
+            {stripeApiKey && (
+              <Route
+                path="/payment"
+                element={(
+                  <Elements stripe={loadStripe(stripeApiKey)}>
+                    <Payment />
+                  </Elements>
+                )}
+              />
+            )}
           </Route>
 
           {/* //using only isAuthenticated as param */}

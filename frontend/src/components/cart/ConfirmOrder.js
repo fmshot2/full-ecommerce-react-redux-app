@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAlert } from "react-alert";
 import Loader from "../layout/Loader";
 import MetaData from "../layout/MetaData";
@@ -12,6 +12,8 @@ import CheckoutSteps from './CheckoutSteps';
 const ConfirmOrder = () => {
     const { cartItems, shippingInfo } = useSelector(state => state.cart)
     const { user } = useSelector(state => state.auth)
+    let navigate = useNavigate()
+
 
     // Calculate Order Prices
     const itemsPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
@@ -28,6 +30,8 @@ const ConfirmOrder = () => {
             totalPrice
         }
         sessionStorage.setItem(data, data)
+        navigate('/payment')
+
     }
 
     return (
@@ -43,7 +47,7 @@ const ConfirmOrder = () => {
                     </div>
                 </div>
 
-                <CheckoutSteps confirmOrder />
+                <CheckoutSteps shipping confirmOrder />
                 <div className="checkout_area section_padding_100">
                     <div className="container">
                         <div className="row">
@@ -65,7 +69,7 @@ const ConfirmOrder = () => {
                                                 <tbody>
                                                     {cartItems.map(item => (
                                                         <Fragment>
-                                                            <tr key={item.product}>
+                                                            <tr key={item.product._id}>
                                                                 {/* <th scope="row" onClick={() => removeCartItemHandler(item.product)}> */}
                                                                 <th scope="row">
                                                                     <i className="icofont-close"></i>

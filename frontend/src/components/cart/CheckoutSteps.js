@@ -1,20 +1,22 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const CheckoutSteps = ({ shipping, confirmOrder, payment}) => {
+    const location = useLocation();
+
   return (
 <div className="checkout_steps_area">
-    {shipping ? <Link to='#!' className='active'>
+    {shipping ? <Link to='shipping' className={location.pathname == '/shipping' ? 'active' : 'complated'}>
         <i class="icofont-check-circled"></i> Billing
-    </Link> : <Link to="/shipping" disabled><i class="icofont-check-circled"></i> Shipping</Link>}
+    </Link> : <Link to="#!" disabled><i class="icofont-check-circled"></i> Shipping</Link>}
 
-    {confirmOrder ? <Link to='#!' className='active'>
+    {confirmOrder ? <Link to='/order/confirm' className={location.pathname == '/order/confirm' ? 'active' : 'complated'}>
         <i class="icofont-check-circled"></i>Confirm Order</Link>
-    : <Link to="/order/confirm" disabled><i class="icofont-check-circled"></i>Confirm Order
+    : <Link to="#!" disabled><i class="icofont-check-circled"></i>Confirm Order
         </Link>}
 
-    {payment ? <Link to='#!' className='active'><i class="icofont-check-circled"></i>Payment
-    </Link> : <Link to="/payment" disabled><i class="icofont-check-circled"></i>Payment
+    {payment ? <Link to='/payment!' className={location.pathname == '/payment' ? 'active' : 'complated'}><i class="icofont-check-circled"></i>Payment
+    </Link> : <Link to="#!" disabled><i class="icofont-check-circled"></i>Payment
         </Link>}
 
 </div>  )
