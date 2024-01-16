@@ -36,6 +36,28 @@ const Payment = () => {
     const paymentData = {
         amount: Math.round(orderInfo.totalPrice * 100)
     }
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        document.querySelector('#pay_btn').disabled = true;
+
+        let res;
+
+        try {
+            
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+            res = await axios.post('/api/v1/payment/process', paymentData, config)
+            const clientSecret = res.data.client_secret;
+
+        } catch (error) {
+            document.querySelector('#pay_btn').disabled = true
+        }
+    }
   return (
     <Fragment>
     <MetaData title={'Shipping Info'} />
