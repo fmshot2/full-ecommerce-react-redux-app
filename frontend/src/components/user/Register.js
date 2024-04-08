@@ -73,6 +73,8 @@ const Register = ({ history, location }) => {
 
         } else {
             setUser({ ...user, [e.target.name]: e.target.value })
+            console.log("use");
+            console.log(user);
         }
     }
 
@@ -90,13 +92,13 @@ const Register = ({ history, location }) => {
 
                                         <form onSubmit={submitHandler} encType='multipart/form-data'>
                                             <div className="form-group">
-                                                <input type="text" className="form-control" id="username" placeholder="Full Name"
+                                                <input type="text" className="form-control" id="name" placeholder="Full Name"
                                                     name='name'
                                                     value={name}
                                                     onChange={onChange} />
                                             </div>
                                             <div className="form-group">
-                                                <input type="email" className="form-control" id="username" placeholder="Email"
+                                                <input type="email" className="form-control" id="email" placeholder="Email"
                                                     name='email'
                                                     value={email}
                                                     onChange={onChange} />

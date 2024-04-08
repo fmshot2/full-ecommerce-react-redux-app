@@ -67,6 +67,8 @@ export const login = (email, password) => async (dispatch) => {
 
 // Register user
 export const register = (userData) => async (dispatch) => {
+    console.log("gfgg");
+    console.log(userData);
     try {
 
         dispatch({ type: REGISTER_USER_REQUEST })
@@ -77,6 +79,8 @@ export const register = (userData) => async (dispatch) => {
             }
         }
 
+        console.log("userdata");
+        console.log(userData);
         const { data } = await axios.post('/api/v1/register', userData, config)
 
         dispatch({
